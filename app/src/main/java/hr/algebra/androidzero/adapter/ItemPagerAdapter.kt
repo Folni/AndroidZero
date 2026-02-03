@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import hr.algebra.androidzero.PRODUCT_PROVIDER_CONTENT_URI // Tvoj URI
+import hr.algebra.androidzero.PRODUCT_PROVIDER_CONTENT_URI
 import hr.algebra.androidzero.R
 import hr.algebra.androidzero.model.Item
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
@@ -32,7 +32,6 @@ class ItemPagerAdapter(
         val item = items[position]
         holder.bind(item)
 
-        // Klik na ikonu (zastavicu) mijenja status "pročitano/kupljeno"
         holder.ivRead.setOnClickListener {
             updateItem(position)
         }
@@ -42,7 +41,6 @@ class ItemPagerAdapter(
         val item = items[position]
         item.read = !item.read
 
-        // Ažuriranje u bazi preko tvog ProductProvidera
         context.contentResolver.update(
             ContentUris.withAppendedId(PRODUCT_PROVIDER_CONTENT_URI, item._id!!),
             ContentValues().apply {
@@ -58,18 +56,21 @@ class ItemPagerAdapter(
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private val tvItem = itemView.findViewById<TextView>(R.id.tvItem)
-        private val tvPrice = itemView.findViewById<TextView>(R.id.tvDate) // Koristimo tvDate ID za prikaz cijene
+        private val tvPrice = itemView.findViewById<TextView>(R.id.tvPrice)
+        private val tvRating = itemView.findViewById<TextView>(R.id.tvRating) // DODANO
         private val tvExplanation = itemView.findViewById<TextView>(R.id.tvExplanation)
         private val ivItem = itemView.findViewById<ImageView>(R.id.ivItem)
         val ivRead = itemView.findViewById<ImageView>(R.id.ivRead)
 
         fun bind(item: Item){
             tvItem.text = item.title
-            // Umjesto datuma, tvoji artikli imaju cijenu
-            tvPrice.text = "${item.price} €"
+            tvPrice.text = "${item.price} $" // FakeStoreAPI je obično u dolarima
+
+            // DODANO: Prikaz ratinga sa zvjezdicom i brojem recenzija
+            tvRating.text = "⭐ ${item.rate} (${item.count} reviews)"
+
             tvExplanation.text = item.explanation
 
-            // Postavljanje ikonice ovisno o statusu
             ivRead.setImageResource(if(item.read) R.drawable.green_flag else R.drawable.red_flag)
 
             Picasso.get()

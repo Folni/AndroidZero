@@ -52,15 +52,18 @@ class ProductFetcher(private val context: Context) {
         val scope = CoroutineScope(Dispatchers.IO)
         scope.launch {
             products.forEach { product ->
-                // 1. KORISTI product.url (jer je to @SerializedName za "image")
                 val picturePath = download(context, product.url)
 
                 val values = ContentValues().apply {
                     put(Item::title.name, product.title)
-                    // 2. KORISTI product.explanation (jer je to @SerializedName za "description")
                     put(Item::explanation.name, product.explanation)
                     put(Item::picturePath.name, picturePath ?: "")
                     put(Item::price.name, product.price)
+
+                    // NOVO: Dohvaćamo podatke iz ugniježđenog 'rating' objekta
+                    put(Item::rate.name, product.rating.rate)
+                    put(Item::count.name, product.rating.count)
+
                     put(Item::read.name, false)
                 }
 

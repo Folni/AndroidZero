@@ -8,17 +8,18 @@ import android.database.sqlite.SQLiteOpenHelper
 import hr.algebra.androidzero.model.Item
 
 private const val DB_NAME = "items.db"
-// Povećavamo verziju na 3 (ili više) kako bi Android obrisao staru tablicu i kreirao novu s 'price' poljem
-private const val DB_VERSION = 3
+// Povećavamo verziju na 4 jer smo dodali rate i count
+private const val DB_VERSION = 4
 private const val TABLE_NAME = "items"
 
-// SQL naredba prilagođena tvojim artiklima
 private val CREATE_TABLE = "create table $TABLE_NAME( " +
         "${Item::_id.name} integer primary key autoincrement, " +
         "${Item::title.name} text not null, " +
-        "${Item::explanation.name} text not null, " + // Ovdje ide description
+        "${Item::explanation.name} text not null, " +
         "${Item::picturePath.name} text not null, " +
-        "${Item::price.name} real not null, " +       // REAL se koristi za Double cijenu
+        "${Item::price.name} real not null, " +
+        "${Item::rate.name} real not null, " +   // DODANO: REAL za Double ocjenu
+        "${Item::count.name} integer not null, " + // DODANO: INTEGER za broj glasova
         "${Item::read.name} integer not null" +
         ")"
 
@@ -33,7 +34,6 @@ class DBRepository(context: Context?) :
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        // Ako promijeniš verziju baze, stara se briše i radi se nova
         db?.execSQL(DROP_TABLE)
         onCreate(db)
     }

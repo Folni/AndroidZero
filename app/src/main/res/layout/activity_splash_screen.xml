@@ -11,14 +11,14 @@
 
     <ImageView
         android:id="@+id/ivSplash"
-        android:src="@drawable/flat_earth"
+        android:src="@drawable/loading_img"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_400dp" />
 
     <TextView
         android:layout_gravity="center"
         android:id="@+id/tvSplash"
-        android:text="@string/please_wait"
+        android:text="@string/loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

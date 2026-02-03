@@ -68,14 +68,20 @@ class ItemAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private val tvItem = itemView.findViewById<TextView>(R.id.tvItem)
         private val ivItem = itemView.findViewById<ImageView>(R.id.ivItem)
+        // DODANO: Dohvaćanje novih polja iz layouta (provjeri ID-ove u item.xml!)
+        private val tvPrice = itemView.findViewById<TextView>(R.id.tvPrice)
+        private val tvRating = itemView.findViewById<TextView>(R.id.tvRating)
 
         fun bind(item: Item){
             tvItem.text = item.title
 
-            // Picasso učitava sliku iz datoteke koju je Fetcher spremio
+            // DODANO: Prikaz cijene i ratinga u listi
+            tvPrice?.text = "${item.price} €"
+            tvRating?.text = "⭐ ${item.rate} (${item.count})"
+
             Picasso.get()
                 .load(File(item.picturePath))
-                .error(R.drawable.placeholder_image) // Promijeni u svoj placeholder ako nemaš R.drawable.nasa
+                .error(R.drawable.placeholder_image)
                 .transform(RoundedCornersTransformation(50, 5))
                 .into(ivItem)
         }

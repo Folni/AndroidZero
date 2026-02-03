@@ -8,7 +8,8 @@
         android:pivotX="50%"
         android:pivotY="50%"
         android:fromDegrees="0"
-        android:toDegrees="359" />
+        android:toDegrees="359"
+        android:repeatCount="infinite"/>
     <scale
         android:pivotX="50%"
         android:pivotY="50%"

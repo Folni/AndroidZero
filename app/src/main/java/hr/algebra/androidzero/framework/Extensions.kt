@@ -62,9 +62,11 @@ fun Context.fetchItems(): MutableList<Item> {
                     rs.getString(rs.getColumnIndex(Item::title.name)),
                     rs.getString(rs.getColumnIndex(Item::explanation.name)),
                     rs.getString(rs.getColumnIndex(Item::picturePath.name)),
-                    // PROMJENA OVDJE: Čitamo Double (price) umjesto String (date)
                     rs.getDouble(rs.getColumnIndex(Item::price.name)),
-                    // PROMJENA OVDJE: SQLite sprema Boolean kao 1 (true) ili 0 (false)
+                    // NOVO: Čitamo rate (Double/Real)
+                    rs.getDouble(rs.getColumnIndex(Item::rate.name)),
+                    // NOVO: Čitamo count (Int/Integer)
+                    rs.getInt(rs.getColumnIndex(Item::count.name)),
                     rs.getInt(rs.getColumnIndex(Item::read.name)) == 1
                 )
             )
