@@ -17,7 +17,6 @@ class ItemsFragment : Fragment() {
     private lateinit var binding: FragmentItemsBinding
     private lateinit var items: MutableList<Item>
 
-    // inicijalizACIJSKA
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

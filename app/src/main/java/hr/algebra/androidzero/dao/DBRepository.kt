@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper
 import hr.algebra.androidzero.model.Item
 
 private const val DB_NAME = "items.db"
-// Povećavamo verziju na 4 jer smo dodali rate i count
 private const val DB_VERSION = 4
 private const val TABLE_NAME = "items"
 
@@ -18,8 +17,8 @@ private val CREATE_TABLE = "create table $TABLE_NAME( " +
         "${Item::explanation.name} text not null, " +
         "${Item::picturePath.name} text not null, " +
         "${Item::price.name} real not null, " +
-        "${Item::rate.name} real not null, " +   // DODANO: REAL za Double ocjenu
-        "${Item::count.name} integer not null, " + // DODANO: INTEGER za broj glasova
+        "${Item::rate.name} real not null, " +
+        "${Item::count.name} integer not null, " +
         "${Item::read.name} integer not null" +
         ")"
 

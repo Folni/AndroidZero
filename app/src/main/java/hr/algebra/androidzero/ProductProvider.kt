@@ -1,4 +1,4 @@
-package hr.algebra.androidzero // Provjeri odgovara li ovaj package tvojoj strukturi
+package hr.algebra.androidzero
 
 import android.content.ContentProvider
 import android.content.ContentUris
@@ -11,7 +11,6 @@ import hr.algebra.androidzero.dao.Repository
 import hr.algebra.androidzero.dao.getRepository
 import hr.algebra.androidzero.model.Item
 
-// 1. Promijeni AUTHORITY u tvoj paket (važno za Manifest!)
 private const val AUTHORITY = "hr.algebra.androidzero.provider"
 private const val PATH = "items"
 val PRODUCT_PROVIDER_CONTENT_URI: Uri = "content://$AUTHORITY/$PATH".toUri()
@@ -30,7 +29,6 @@ class ProductProvider : ContentProvider() {
     private lateinit var repository: Repository
 
     override fun onCreate(): Boolean {
-        // Dohvaća tvoj Repository koji upravlja bazom (Room ili SQLite)
         repository = getRepository(context)
         return true
     }

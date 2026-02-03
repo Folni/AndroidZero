@@ -9,7 +9,7 @@ data class ProductItem(
     @SerializedName("description") val explanation: String,
     @SerializedName("image") val url: String,
     @SerializedName("category") val category: String,
-    @SerializedName("rating") val rating: Rating // DODANO: Poveznica na Rating objekt
+    @SerializedName("rating") val rating: Rating
 )
 
 // DODANO: Nova pomoćna klasa za ugniježđeni JSON objekt

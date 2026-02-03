@@ -32,13 +32,11 @@ class ProductFetcher(private val context: Context) {
     fun fetchItems() {
         val request = productApi.fetchItems()
 
-        // Ovdje koristimo List<ProductItem> jer tvoj API vraća listu, a ne Record objekt
         request.enqueue(object : Callback<List<ProductItem>> {
             override fun onResponse(
                 call: Call<List<ProductItem>>,
                 response: Response<List<ProductItem>>
             ) {
-                // response.body() je sada direktno lista tvojih artikala
                 response.body()?.let { populateItems(it) }
             }
 
@@ -60,7 +58,6 @@ class ProductFetcher(private val context: Context) {
                     put(Item::picturePath.name, picturePath ?: "")
                     put(Item::price.name, product.price)
 
-                    // NOVO: Dohvaćamo podatke iz ugniježđenog 'rating' objekta
                     put(Item::rate.name, product.rating.rate)
                     put(Item::count.name, product.rating.count)
 

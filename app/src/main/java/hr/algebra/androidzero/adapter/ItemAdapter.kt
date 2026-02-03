@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import hr.algebra.androidzero.ITEM_POS
 import hr.algebra.androidzero.ItemPagerActivity
-import hr.algebra.androidzero.PRODUCT_PROVIDER_CONTENT_URI // Koristimo tvoj novi URI
+import hr.algebra.androidzero.PRODUCT_PROVIDER_CONTENT_URI
 import hr.algebra.androidzero.R
 import hr.algebra.androidzero.framework.startActivity
 import hr.algebra.androidzero.model.Item
@@ -34,12 +34,10 @@ class ItemAdapter(
         val item = items[position]
         holder.bind(item)
 
-        // Klik na artikl otvara detalje (Pager)
         holder.itemView.setOnClickListener {
             context.startActivity<ItemPagerActivity>(ITEM_POS, position)
         }
 
-        // Dugi klik briše artikl
         holder.itemView.setOnLongClickListener {
             deleteItem(position)
             true
@@ -48,13 +46,11 @@ class ItemAdapter(
 
     private fun deleteItem(position: Int) {
         val item = items[position]
-        // Brišemo iz baze preko ContentProvidera
         context.contentResolver.delete(
             ContentUris.withAppendedId(PRODUCT_PROVIDER_CONTENT_URI, item._id!!),
             null,
             null
         )
-        // Brišemo lokalno spremljenu sliku s mobitela
         if (item.picturePath.isNotEmpty()) {
             File(item.picturePath).delete()
         }
@@ -68,14 +64,12 @@ class ItemAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private val tvItem = itemView.findViewById<TextView>(R.id.tvItem)
         private val ivItem = itemView.findViewById<ImageView>(R.id.ivItem)
-        // DODANO: Dohvaćanje novih polja iz layouta (provjeri ID-ove u item.xml!)
         private val tvPrice = itemView.findViewById<TextView>(R.id.tvPrice)
         private val tvRating = itemView.findViewById<TextView>(R.id.tvRating)
 
         fun bind(item: Item){
             tvItem.text = item.title
 
-            // DODANO: Prikaz cijene i ratinga u listi
             tvPrice?.text = "${item.price} €"
             tvRating?.text = "⭐ ${item.rate} (${item.count})"
 

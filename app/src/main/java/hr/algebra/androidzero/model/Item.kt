@@ -6,7 +6,7 @@ data class Item(
     val explanation: String,
     val picturePath: String,
     val price: Double,
-    val rate: Double,    // Novo: Prosječna ocjena (npr. 3.9)
-    val count: Int,      // Novo: Broj glasova (npr. 120)
+    val rate: Double,
+    val count: Int,
     var read: Boolean
 )

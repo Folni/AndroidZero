@@ -57,16 +57,15 @@ class ItemPagerAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private val tvItem = itemView.findViewById<TextView>(R.id.tvItem)
         private val tvPrice = itemView.findViewById<TextView>(R.id.tvPrice)
-        private val tvRating = itemView.findViewById<TextView>(R.id.tvRating) // DODANO
+        private val tvRating = itemView.findViewById<TextView>(R.id.tvRating)
         private val tvExplanation = itemView.findViewById<TextView>(R.id.tvExplanation)
         private val ivItem = itemView.findViewById<ImageView>(R.id.ivItem)
         val ivRead = itemView.findViewById<ImageView>(R.id.ivRead)
 
         fun bind(item: Item){
             tvItem.text = item.title
-            tvPrice.text = "${item.price} $" // FakeStoreAPI je obično u dolarima
+            tvPrice.text = "${item.price} $"
 
-            // DODANO: Prikaz ratinga sa zvjezdicom i brojem recenzija
             tvRating.text = "⭐ ${item.rate} (${item.count} reviews)"
 
             tvExplanation.text = item.explanation
