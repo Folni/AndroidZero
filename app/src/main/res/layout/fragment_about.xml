@@ -1,24 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/_20dp"
-    android:layout_height="match_parent"
-    tools:context=".fragment.AboutFragment">
+    android:gravity="center"
+    android:padding="30dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:src="@drawable/product_about"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp">
+
+        <ImageView
+            android:src="@drawable/product_about"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="ContentDescription" />
+
+    </androidx.cardview.widget.CardView>
 
     <TextView
-        android:gravity="top|center"
-        android:textSize="@dimen/_50sp"
+        android:id="@+id/tvAbout"
+        android:layout_marginTop="32dp"
+        android:textSize="24sp"
+        android:gravity="center"
         android:text="@string/about_app"
+        android:textColor="#333333"
+        android:fontFamily="serif"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
